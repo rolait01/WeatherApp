@@ -1,0 +1,128 @@
+﻿/* --- Globus-Container --- */
+.container {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  background:
+    radial-gradient(
+      820px 420px at 30% -15%,
+      color-mix(in srgb, var(--accent) 15%, transparent),
+      transparent 55%
+    ),
+    color-mix(in srgb, var(--card) 98%, transparent);
+  padding: 8px; /* nur schmaler Rahmen */
+  overflow: hidden;
+}
+
+/* Nur wenn Overlay geöffnet: unten Platz reservieren (kompakt) */
+.hasOverlay {
+  padding-bottom: clamp(84px, 12vw, 120px);
+}
+
+.container canvas {
+  display: block;
+  border-radius: 10px;
+  image-rendering: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Overlay unten, zentriert --- */
+.overlay {
+  position: absolute;
+  inset: auto 8px calc(8px + env(safe-area-inset-bottom)) 8px; /* respektiert iOS Safe-Area */
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Auswahlkarte (Bottom-Sheet Look) */
+.card {
+  width: 100%;
+  max-width: 1100px; /* Desktop-Obergrenze */
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px) saturate(120%);
+  background:
+    linear-gradient(180deg, rgba(20, 24, 32, 0.52), rgba(20, 24, 32, 0.36)),
+    color-mix(in srgb, var(--panel) 92%, transparent);
+}
+:global([data-theme="light"]) .card {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.58),
+      rgba(255, 255, 255, 0.42)
+    ),
+    color-mix(in srgb, var(--panel) 96%, transparent);
+}
+
+.title {
+  font-size: clamp(20px, 3.4vw, 30px);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+.meta {
+  margin-top: 6px;
+  opacity: 0.85;
+  font-size: 14px;
+}
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.primary {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 40%, transparent),
+    transparent
+  );
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+/* ===== Mobile-Tuning ===== */
+@media (max-width: 640px) {
+  /* reservierter Platz kleiner, damit der Kasten nicht zu hoch wird */
+  .hasOverlay {
+    padding-bottom: clamp(72px, 18vw, 100px);
+  }
+
+  .overlay {
+    inset: auto 6px calc(6px + env(safe-area-inset-bottom)) 6px;
+  }
+
+  .card {
+    border-radius: 14px;
+    padding: 12px;
+    max-width: 720px;
+  }
+  .title {
+    font-size: clamp(18px, 5.2vw, 24px);
+  }
+  .meta {
+    font-size: 13px;
+  }
+
+  /* Buttons groß & gut klickbar, untereinander */
+  .actions {
+    gap: 8px;
+  }
+  .actions .btn {
+    width: 100%;
+    min-height: 44px; /* Finger-gerecht */
+    font-size: 15px;
+  }
+  /* Primärknopf visuell vorne */
+  .actions .btn:first-child {
+    order: 0;
+  }
+}

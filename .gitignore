@@ -1,0 +1,36 @@
+﻿@"
+# --- Dependencies ---
+**/node_modules/
+
+# --- Next.js / Build-Artefakte ---
+frontend/.next/
+**/dist/
+**/build/
+**/.cache/
+
+# --- Env Dateien (niemals committen) ---
+*.env
+*.env.*.local
+*.env.local
+backend/.env
+frontend/.env*
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Tests / Coverage ---
+coverage/
+
+# --- Misc ---
+*.swp
+*.swo
+"@ | Set-Content -Encoding UTF8 .gitignore
